@@ -9,10 +9,12 @@ class repvgg(tf.keras.Model):
         # default A0 architecture training on CIFAR-10 dataset
 
         super(repvgg, self).__init__()
-        self.aug = tf.keras.Sequential([
-            layers.experimental.preprocessing.RandomCrop(32, 32),
-            layers.experimental.preprocessing.RandomFlip("horizontal_and_vertical"),
-            ])
+        self.aug = tf.keras.Sequential(
+            [
+                layers.experimental.preprocessing.RandomCrop(32, 32),
+                layers.experimental.preprocessing.RandomFlip("horizontal_and_vertical"),
+            ]
+        )
         self.st1 = stage(min(64, 64 * a), l[0])
         self.st2 = stage(64 * a, l[1])
         self.st3 = stage(128 * a, l[2])

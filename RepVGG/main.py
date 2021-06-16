@@ -34,6 +34,7 @@ class mcb(tf.keras.callbacks.Callback):
             print("\nReached 95% accuracy so cancelling training!")
             self.model.stop_training = True
 
+
 cb = mcb()
 
 
@@ -46,7 +47,9 @@ model.compile(
 )
 
 history = model.fit(
-    x_train, y_train, batch_size=args.batch_size,
+    x_train,
+    y_train,
+    batch_size=args.batch_size,
     epochs=args.epochs,
     validation_data=(x_test, y_test),
     callbacks=[cb],
