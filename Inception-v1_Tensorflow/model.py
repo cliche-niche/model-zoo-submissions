@@ -3,13 +3,13 @@ from tensorflow.keras import layers
 from layer import reduce, inceptionblock, auxiliary
 
 
-
 class inceptionv1(tf.keras.Model):
-
     def __init__(self, channels=10):
         super(inceptionv1, self).__init__()
 
-        self.con7 = layers.Conv2D(64, kernel_size=7, strides=2, padding="same", activation="relu")
+        self.con7 = layers.Conv2D(
+            64, kernel_size=7, strides=2, padding="same", activation="relu"
+        )
         self.max3_2 = layers.MaxPooling2D(3, strides=2)
         self.lrn1 = layers.Lambda(tf.nn.local_response_normalization)
         self.con3 = reduce(64, 3, 192)
@@ -32,17 +32,16 @@ class inceptionv1(tf.keras.Model):
         self.flat = layers.Flatten()
         self.full = layers.Dense(channels, activation="softmax")
 
-
     def call(self, inp):
         x = self.con7(inp)
         x = self.max3_2(x)
         x = self.lrn1(x)
         x = self.con3(x)
         x = self.lrn2(x)
-        #x = self.max3_2(x)
+        # x = self.max3_2(x)
         x = self.in3a(x)
         x = self.in3b(x)
-        #x = self.max3_2(x)
+        # x = self.max3_2(x)
         x = self.in4a(x)
         a1 = self.aux1(x)
         x = self.in4b(x)
@@ -50,7 +49,7 @@ class inceptionv1(tf.keras.Model):
         x = self.in4d(x)
         a2 = self.aux2(x)
         x = self.in4e(x)
-        #x = self.max3_2(x)
+        # x = self.max3_2(x)
         x = self.in5a(x)
         x = self.in5b(x)
         x = self.avgp(x)
@@ -58,7 +57,6 @@ class inceptionv1(tf.keras.Model):
         x = self.flat(x)
         x = self.full(x)
         return [x, a1, a2]
-
 
     def model(self, inp):
         x = layers.Input(shape=inp[0].shape)

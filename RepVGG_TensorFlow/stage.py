@@ -1,6 +1,7 @@
 from tensorflow.keras import layers
 from lay import lay
 
+
 class stage(layers.Layer):
     def __init__(self, filters, layer):
         """
@@ -12,7 +13,7 @@ class stage(layers.Layer):
         self.num = layer
         self.lay = []
         for i in range(self.num):
-            self.lay.append(lay(filters, i==0))
+            self.lay.append(lay(filters, i == 0))
 
     def call(self, inp):
         x = inp
