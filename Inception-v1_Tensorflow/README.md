@@ -31,9 +31,9 @@ An auxiliary classifier is applied after `Inception Block 4a` and `Inception Blo
 The exact structures of an inception block, an auxiliary classifier, and parameters of the whole model are provided below. The entries in `3x3 Reduce` and `5x5 Reduce` stand respectively for the number of filters in the `1x1 Conv` layer preceding them. The entry in `pool proj` stands for the number of filters in the layer that follows the `Max Pooling` layer.
 
 
-<img src ="./assets/block.png" title="Inception Block"> <img src ="./assets/auxiliary.png" title="Auxiliary Classifier">
+<img src ="./assets/block.PNG" title="Inception Block"> <img src ="./assets/auxiliary.PNG" title="Auxiliary Classifier">
 
-<img src ="./assets/parameters.png" title="Parameters">
+<img src ="./assets/parameters.PNG" title="Parameters">
 
 Some `Max Pooling` layers have been commented in this implementation because CIFAR-10 dataset was used to train the model.
 
